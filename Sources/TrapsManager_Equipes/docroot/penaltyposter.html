@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <form action="trapsmanager/setpenaltylist" method="post">
+            user: <input type="text" name="user" value="userId"><br>
+            password: <input type="text" name="password" value="mypass"><br>
+            <textarea rows="25" cols="80" type="text" name="json">
+{
+    "bib": 100,
+    "penaltyList":[
+        {
+            "gateIndex": 1,
+            "value": 2,
+            "Xmark1": 50,
+            "Ymark1": 70,
+            "Xmark2": -1,
+            "Ymark2": -1,
+            "teammate": false
+        },
+        {
+            "gateIndex": 0,
+            "value": 0,
+            "Xmark1": -1,
+            "Ymark1": -1,
+            "Xmark2": -1,
+            "Ymark2": -1,
+            "teammate": false
+        }
+
+    ]
+}
+            </textarea><br>
+            <input type="submit">
+        </form>
+    </body>
+</html>
