@@ -1,0 +1,11 @@
+{
+    "elapsedSecondsSinceEpoch": 1749980400,
+    "version": "1.0",
+    "targets": {
+        "windows":"http://www.traps-ck.com/packages/windows/trapsmanager4.5-install.exe",
+        "cocoa":"http://www.traps-ck.com/packages/macos/trapsmanager4.5.dmg",
+        "xcb":"http://www.traps-ck.com/packages/linux/trapsmanager4.5.tar.gz"
+    },
+    "whatsnew": "L'application propose des mises à jour.",
+    "url": "http://www.traps-ck.com/packages/trapsmanager.json"
+}

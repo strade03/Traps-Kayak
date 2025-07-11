@@ -1,0 +1,41 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>config/HTTPServer.ini</file>
+        <file>docroot/index.html</file>
+        <file>qml/BibGrid.qml</file>
+        <file>qml/Bib.qml</file>
+        <file>qml/Penalty.qml</file>
+        <file>qml/BibHeader.qml</file>
+        <file>qml/PenaltyHeader.qml</file>
+        <file>docroot/penaltyposter.html</file>
+        <file>qml/ComPanel.qml</file>
+        <file>qml/MenuRow.qml</file>
+        <file>qml/App.qml</file>
+        <file>qml/Toaster.qml</file>
+        <file>qml/Activity.qml</file>
+        <file>qml/TRAPSButton.qml</file>
+        <file>qml/BibScheduling.qml</file>
+        <file>qml/TabHeader.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>qml/FFCanoePanel.qml</file>
+        <file>qml/TRAPSDrawer.qml</file>
+        <file>qml/images/32x32_link.png</file>
+        <file>qml/CompetFFCKPanel.qml</file>
+        <file>qml/images/information.svg</file>
+        <file>qml/images/question.svg</file>
+        <file>qml/images/alert.svg</file>
+        <file>qml/DialogBox.qml</file>
+        <file>qml/images/gestionbouton.png</file>
+        <file>qml/images/infoipport.png</file>
+        <file>qml/images/access-point-network.svg</file>
+        <file>qml/images/link_black.svg</file>
+        <file>qml/images/link_white.svg</file>
+        <file>qml/DialogLoader.qml</file>
+        <file>qml/SoftwareUpdate.qml</file>
+        <file>qml/images/traps240.png</file>
+        <file>qml/images/update80.png</file>
+        <file>trapsmanager.json</file>
+        <file>qml/Popup.qml</file>
+    </qresource>
+</RCC>
