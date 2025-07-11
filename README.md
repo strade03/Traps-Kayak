@@ -1,6 +1,6 @@
 # Traps Kayak
 
-Retrouvez les nouvelles versions de Traps qui prennent en charge la geestion des courses par équipe et le Time Trial en Kayak Cross.
+Retrouvez les nouvelles versions de Traps qui prennent en charge la gestion des courses par équipes et le Time Trial en Kayak Cross.
 
 Ces évolutions ont été réalisées à partir des sources publiées 
 
