@@ -15,7 +15,7 @@ Décompresser les sources<br>
 Le fichier compilé se trouve ./TrapsApp-V3/app/build/outputs/apk/release
 
 Si besoin d'ouvrir une session dans le conteneur  :<br>
-- docker run -v ./:/app -it android_builder /bin/bash
+> docker run -v ./:/app -it android_builder /bin/bash
 
 ## Compilation TrapsManager
 Sous Windows installer Qt 5.10.1 + MinGW 32bits<br>
