@@ -15,26 +15,42 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-   // Ajout pour la signature de l'APK
+    // Ajout pour la signature de l'APK
     // Chargement des propriétés du keystore depuis la racine
     def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()
+    def hasKeystore = false
+
     if (keystorePropertiesFile.exists()) {
         keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        // Vérifier que toutes les propriétés nécessaires sont présentes
+        hasKeystore = keystoreProperties['storeFile'] && 
+                    keystoreProperties['storePassword'] && 
+                    keystoreProperties['keyAlias'] && 
+                    keystoreProperties['keyPassword']
     }
-    signingConfigs {
-        release {
-            storeFile file(keystoreProperties['storeFile'] ?: 'trapsapp-release-key.keystore')
-            storePassword keystoreProperties['storePassword'] ?: System.getenv("MY_KEYSTORE_PASSWORD")
-            keyAlias keystoreProperties['keyAlias'] ?: System.getenv("MY_KEY_ALIAS")
-            keyPassword keystoreProperties['keyPassword'] ?: System.getenv("MY_KEY_PASSWORD")
+
+    android {
+        signingConfigs {
+            if (hasKeystore) {
+                release {
+                    storeFile file(keystoreProperties['storeFile'])
+                    storePassword keystoreProperties['storePassword']
+                    keyAlias keystoreProperties['keyAlias']
+                    keyPassword keystoreProperties['keyPassword']
+                }
+            }
         }
     }
 
     buildTypes {
         release {
             // Ajout pour signer 
-            signingConfig signingConfigs.release // Appliquer la configuration de signature
+            if (hasKeystore) {
+                signingConfig signingConfigs.release
+            } else {
+                println "⚠️  Aucun keystore trouvé - compilation sans signature"
+            }
             shrinkResources true // Supprimer les ressources inutilisées
             zipAlignEnabled true
 
