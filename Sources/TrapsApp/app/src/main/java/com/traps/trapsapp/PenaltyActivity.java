@@ -34,6 +34,9 @@ import android.Manifest;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.annotation.NonNull;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 
 import com.traps.trapsapp.core.Bib;
 import com.traps.trapsapp.core.PenaltyPad;
