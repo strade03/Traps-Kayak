@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace "com.traps.trapsequipes"
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.traps.trapsequipes"
+        minSdk 16
+        targetSdk 33
+        versionCode 1
+        versionName "1.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+   // Ajout pour la signature de l'APK
+    // Chargement des propriétés du keystore depuis la racine
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    def hasKeystore = false
+
+    if (keystorePropertiesFile.exists()) {
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+        // Vérifier que toutes les propriétés nécessaires sont présentes
+        hasKeystore = keystoreProperties['storeFile'] && 
+                    keystoreProperties['storePassword'] && 
+                    keystoreProperties['keyAlias'] && 
+                    keystoreProperties['keyPassword']
+    }
+
+    android {
+        signingConfigs {
+            if (hasKeystore) {
+                release {
+                    storeFile file(keystoreProperties['storeFile'])
+                    storePassword keystoreProperties['storePassword']
+                    keyAlias keystoreProperties['keyAlias']
+                    keyPassword keystoreProperties['keyPassword']
+                }
+            }
+        }
+    }
+
+
+    buildTypes {
+        release {
+            // Ajout pour signer 
+            if (hasKeystore) {
+                signingConfig signingConfigs.release
+            } else {
+                println "⚠️  Aucun keystore trouvé - compilation sans signature"
+            }
+            shrinkResources true // Supprimer les ressources inutilisées
+            zipAlignEnabled true
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.9.0'
+    
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

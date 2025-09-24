@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <CheckBox
+        android:id="@+id/transferCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="    Envoyer les pénalités   "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+     <LinearLayout
+        android:layout_width="fill_parent"
+         android:layout_height="2dip"
+            android:background="#AAAAAA" />
+
+    <RadioButton
+        android:id="@+id/transferRadioButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="   par WIFI à TRAPSManager   " />
+
+    <CheckBox
+        android:id="@+id/detectCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Détection automatique sur le réseau de TRAPSManager" />
+    
+ <LinearLayout
+            android:id="@+id/transferLayoutLAN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+    
+   
+        <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        
+            <TextView
+            android:id="@+id/transferTextView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IP:  "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/transferAddress1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/transferDot1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="."
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/transferAddress2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:maxLength="3"
+            android:inputType="phone" 
+          />
+
+        <TextView
+            android:id="@+id/transferDot2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="."
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <EditText
+            android:id="@+id/transferAddress3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="1"
+            android:maxLength="3"
+            android:inputType="phone" />
+        
+        <TextView
+            android:id="@+id/transferDot3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="."
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/transferAddress4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLength="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="phone" />
+
+    </LinearLayout>
+
+     
+        
+
+    
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="right" >
+
+        <TextView
+            android:id="@+id/transferTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Port:  "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editPortTRAPSManager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="4"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="number" >
+
+        </EditText>
+
+    </LinearLayout>
+    
+        </LinearLayout>
+        
+ 
+        <LinearLayout
+        android:layout_width="fill_parent"
+         android:layout_height="2dip"
+            android:background="#AAAAAA" /> 
+
+    <RadioButton
+        android:id="@+id/transferRadioButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="   par SMS à un autre terminal TRAPS" />
+
+    <LinearLayout
+        android:id="@+id/transferLayoutSMS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/transferAddressLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Numéro:  "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/transferAddressParam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="phone"
+            android:lines="1" >
+
+        </EditText>
+    </LinearLayout>
+    
+    
+  <LinearLayout
+        android:layout_width="fill_parent"
+         android:layout_height="2dip"
+            android:background="#AAAAAA" /> 
+    
+    
+    
+       <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom|fill_vertical"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/transferOKButton"
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
+            android:layout_gravity="bottom"
+            android:text=" OK "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+   
+
+</LinearLayout>

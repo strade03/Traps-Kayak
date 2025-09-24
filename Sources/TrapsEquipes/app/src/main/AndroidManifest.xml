@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SENDTO" />
+
+    <permission android:name="com.traps.trapsequipes.permission.RECEIVE_SENDTO" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".BiblistActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.traps.trapsequipes.PenaltyActivity"
+            android:configChanges="orientation"
+            android:label="@string/TerminalActivity_title" >
+        </activity>
+        <activity
+            android:name="com.traps.trapsequipes.SenderListActivity"
+            android:label="@string/SenderListActivity_title"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.traps.trapsequipes.FFCanoeConnectActivity"
+            android:label="@string/FFCanoeConnectActivity_title"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+
+        <activity
+            android:name="com.traps.trapsequipes.TerminalConfigActivity"
+            android:label="@string/title_transfer_activity"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.traps.trapsequipes.ChronoActivity"
+            android:label="@string/title_activity_chrono" >
+        </activity>
+
+
+
+    </application>
+</manifest>
