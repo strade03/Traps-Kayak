@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#000000"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+         
+
+    <LinearLayout
+        android:id="@+id/row0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gateText0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/targetletter"
+            android:gravity="center"
+            android:text="  01  "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty02"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text="50"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty01"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 2 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty00"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 0 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+    
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+    
+    <LinearLayout
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gateText1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/targetletter"
+            android:gravity="center"
+            android:text="  02  "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty12"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text="50"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty11"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 2 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty10"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 0 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+
+    
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+    <LinearLayout
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gateText2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/targetletter"
+            android:gravity="center"
+            android:text="  03  "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty22"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text="50"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty21"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 2 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty20"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 0 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+                <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+    <LinearLayout
+        android:id="@+id/row3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gateText3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/targetletter"
+            android:gravity="center"
+            android:text="  04  "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty32"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text="50"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty31"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 2 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty30"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 0 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp" />
+    <LinearLayout
+        android:id="@+id/row4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/gateText4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/targetletter"
+            android:gravity="center"
+            android:text="  05  "
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty42"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text="50"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty41"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 2 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/penalty40"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/penalty"
+            android:text=" 0 "
+            android:textSize="35sp"
+            android:textStyle="bold" />
+        
+    </LinearLayout>
+    
+     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp" />
+    <LinearLayout
+        android:id="@+id/rowButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1" >
+
+      <ImageButton
+          android:id="@+id/previous_button"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:adjustViewBounds="true"
+          android:background="#000000"
+          android:scaleType="centerInside"
+          android:src="@drawable/button_prevbib" />
+
+      <TextView
+          android:id="@+id/textView1"
+          android:layout_width="1dp"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:textSize="25sp" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="#000000"
+            android:scaleType="centerInside"
+            android:src="@drawable/button_nextbib" />
+        
+    </LinearLayout>
+                            
+    
+
+</LinearLayout>

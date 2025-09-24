@@ -1,0 +1,8 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:id="@+id/setgates" android:title="Définir portes" android:icon="@drawable/content_event"></item>
+        <item android:id="@+id/exitterm" android:title="Quitter terminal" android:icon="@drawable/icon_exit"></item>
+        
+      
+    </menu>
