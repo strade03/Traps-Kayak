@@ -28,15 +28,15 @@ TRAPS App est une application Android native dédiée à la gestion des compéti
 ```bash
 git clone [URL_DU_REPO]
 ``` 
-2. Ouvrez le projet dans Android Studio
-3. Créer la clé pour la signature :
+1. Ouvrez le projet dans VSCode 
+2. Créer la clé pour la signature :
    1. si vous utilser docker :
          docker run -v ./:/app -it android_builder /bin/bash
    2. placer dans le dossier app pour y créer la clé.
    3. keytool -genkey -v -keystore trapsapp-release-key.keystore -alias trapsapp_key -keyalg RSA -keysize 2048 -validity 10000
    4. renseigner le fichier keystore.properties (storePassword et keyPassword)
 
-4. Avec docker pour compiler :
+3. Avec docker pour compiler :
       docker run --rm  -v ./:/app android_builder gradle assembleRelease --stacktrace -x lint
 
 
