@@ -34,7 +34,7 @@ git clone [URL_DU_REPO]
          docker run -v ./:/app -it android_builder /bin/bash
    2. placer dans le dossier app pour y créer la clé.
    3. keytool -genkey -v -keystore trapsapp-release-key.keystore -alias trapsapp_key -keyalg RSA -keysize 2048 -validity 10000
-   4. Editer le fichier keystore.properties (storePassword et keyPassword)
+   4. Editer le fichier keystore.properties (utiliser keystore.properties.demo après l'avoir renommé keystore.properties)
 
 3. Avec docker pour compiler :<br>
       docker run --rm  -v ./:/app android_builder gradle assembleRelease --stacktrace -x lint
