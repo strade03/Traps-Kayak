@@ -1,4 +1,4 @@
-package com.traps.trapsapp.core;
+package com.traps.trapsequipes.core;
 
 import java.util.ArrayList;
 
@@ -38,8 +38,8 @@ public class TrapsDB {
 	
 	private static final String COLUMN_NAME_ASSIGN_GATE = "assigngate";
 	
-	public final static int MAX_GATE_COUNT = 25;
-	public final static int MAX_GATE_TERMINAL_COUNT = 5;
+	public final static int MAX_GATE_COUNT = 75;
+	public final static int MAX_GATE_TERMINAL_COUNT = 9;
 	
 	private static TrapsDB instance = null;
 	

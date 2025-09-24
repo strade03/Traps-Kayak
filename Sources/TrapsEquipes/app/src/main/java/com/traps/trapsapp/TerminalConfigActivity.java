@@ -1,4 +1,4 @@
-package com.traps.trapsapp;
+package com.traps.trapsequipes;
 
 
 import android.app.Activity;
@@ -21,11 +21,11 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.traps.trapsapp.core.IPAddressHelper;
-import com.traps.trapsapp.core.Utility;
-import com.traps.trapsapp.core.WIFIActivatingTask;
+import com.traps.trapsequipes.core.IPAddressHelper;
+import com.traps.trapsequipes.core.Utility;
+import com.traps.trapsequipes.core.WIFIActivatingTask;
 
-public class TerminalConfigActivity extends AppCompatActivity { // Removed OnClickListener here as we set listeners individually
+public class TerminalConfigActivity extends AppCompatActivity implements OnClickListener {
 
 	public final static String KEY_PORT = "port";
 	public final static String KEY_IP_ADDRESS = "lanAddress";
@@ -38,11 +38,6 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
 	public final static String MODE_SMS = "modeSMS";
 	public final static String MODE_LAN = "modeLAN";
 	public final static String MODE = "mode";
-
-    // New key for storing penalty layout mode
-    public final static String KEY_PENALTY_LAYOUT_MODE = "penaltyLayoutMode";
-    public final static String LAYOUT_MODE_SLALOM = "slalom";
-    public final static String LAYOUT_MODE_KCROSS = "kcross";
 	
 
 	private final static String KEY_ADDRESS0 = "address0";
@@ -50,10 +45,7 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
 	private final static String KEY_ADDRESS2 = "address2";
 	private final static String KEY_ADDRESS3 = "address3";
 	
-	// private Button okButton; // This button is commented out in layout
-	private Button kCrossButton;
-	private Button slalomButton;
-
+	private Button okButton;
 	private EditText portField;
 	private EditText smsAddress;
 	
@@ -112,25 +104,8 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
         else checkbox.setText("Envoyer les chronos");
         autoDetectCheckbox = (CheckBox)findViewById(R.id.detectCheckBox);
         
-        // okButton = (Button)findViewById(R.id.transferOKButton); // Commented out
-        // okButton.setOnClickListener(this);
-        
-        kCrossButton = (Button) findViewById(R.id.kCrossButton);
-        slalomButton = (Button) findViewById(R.id.slalomButton);
-
-        kCrossButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveSettingsAndProceed(LAYOUT_MODE_KCROSS);
-            }
-        });
-
-        slalomButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveSettingsAndProceed(LAYOUT_MODE_SLALOM);
-            }
-        });
+        okButton = (Button)findViewById(R.id.transferOKButton);
+        okButton.setOnClickListener(this);
         
         processCheckChanged();
          
@@ -214,7 +189,7 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
         }
 	}
 	
-	private void saveSettingsAndProceed(String penaltyLayoutMode) {
+	public void onClick(View v) {
 		
 		int port = 0;
 		//check first
@@ -230,12 +205,6 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
 		}
 		SharedPreferences pref = getSharedPreferences("SETTINGS_TRANSFER",MODE_PRIVATE);
 		SharedPreferences.Editor editor = pref.edit();
-		
-        // Save the chosen penalty layout mode
-        if (!chronoConfig) { // Only save for penalty mode, not chrono mode
-             editor.putString(KEY_PENALTY_LAYOUT_MODE, penaltyLayoutMode);
-        }
-
 		if (transferEnabled) {
 			editor.putBoolean(KEY_TRANSFER_ENABLED, true);
 			if (smsEnabled) {
@@ -267,13 +236,6 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
 			else data.putExtra(MODE, MODE_LAN);
 		}
 		else data.putExtra(MODE, MODE_NOTRANSFER);
-		
-        // If it's for penalty configuration, pass the chosen mode back.
-        // This is useful if BiblistActivity needs it, though PenaltyActivity will read from SharedPreferences.
-        if (!chronoConfig) {
-            data.putExtra(KEY_PENALTY_LAYOUT_MODE, penaltyLayoutMode);
-        }
-
 		setResult(RESULT_OK, data);
 		
 		final Context thisContext = this;
@@ -309,4 +271,7 @@ public class TerminalConfigActivity extends AppCompatActivity { // Removed OnCli
 		} else finish();
 		
 	}
+
+	
+	
 }

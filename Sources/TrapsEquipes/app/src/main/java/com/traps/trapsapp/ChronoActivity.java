@@ -1,4 +1,4 @@
-package com.traps.trapsapp;
+package com.traps.trapsequipes;
 
 import java.net.InetSocketAddress;
 import java.text.SimpleDateFormat;
@@ -33,12 +33,12 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.traps.trapsapp.core.Bib;
-import com.traps.trapsapp.core.SystemParam;
-import com.traps.trapsapp.core.TrapsDB;
-import com.traps.trapsapp.core.Utility;
-import com.traps.trapsapp.network.TRAPSChrono;
-import com.traps.trapsapp.network.TRAPSManagerThread;
+import com.traps.trapsequipes.core.Bib;
+import com.traps.trapsequipes.core.SystemParam;
+import com.traps.trapsequipes.core.TrapsDB;
+import com.traps.trapsequipes.core.Utility;
+import com.traps.trapsequipes.network.TRAPSChrono;
+import com.traps.trapsequipes.network.TRAPSManagerThread;
 
 public class ChronoActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.traps.trapsapp.core;
+package com.traps.trapsequipes.core;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -9,7 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.traps.trapsapp.network.FFCanoeThread;
+import com.traps.trapsequipes.network.FFCanoeThread;
 
 public class FFCanoeHelper {
 	

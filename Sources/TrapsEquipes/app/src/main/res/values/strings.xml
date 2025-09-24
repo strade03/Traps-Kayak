@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TRAPS-CK</string>
+    <string name="app_name">TRAPS-CK Equipes</string>
     <string name="OK">OK</string>
     <string name="cancel">Annuler</string>
-    <string name="BiblistActivity_title">TRAPS-CK 3.0</string>
+    <string name="BiblistActivity_title">TRAPS-CK Equipes 1.0</string>
     <string name="BiblistActivity_disconnect_ffcanoe">Déconnexion FFCanoe</string>
     <string name="BiblistActivity_connect_ffcanoe">Connexion FFCanoe</string>
     <string name="BiblistActivity_no_bib">Aucun dossard</string>
@@ -34,7 +34,7 @@
     <string name="TerminalActivity_license_accepted">Numéro de licence accepté</string>
     <string name="TerminalActivity_license_refused">Numéro de licence refusé</string>
     <string name="TerminalActivity_license_no_more_sending">Numéro de licence refusé</string>
-    <string name="TerminalActivity_title">TRAPS-CK 3.0 | Terminal</string>
+    <string name="TerminalActivity_title">TRAPS-CK Equipes 1.0 | Terminal</string>
     <string name="SenderListActivity_title">Numéros émetteurs autorisés</string>
     <string name="SenderListActivity_addDAddress">Numéro émetteur:</string>
     <string name="SenderListActivity_no_device_specified">Aucun numéro spécifié. Les pénalités provenant de tout terminal seront acceptées.</string>

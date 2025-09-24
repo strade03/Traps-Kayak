@@ -1,4 +1,4 @@
-package com.traps.trapsapp;
+package com.traps.trapsequipes;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -29,12 +29,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.traps.trapsapp.core.Bib;
-import com.traps.trapsapp.core.PenaltyPad;
-import com.traps.trapsapp.core.TrapsDB;
-import com.traps.trapsapp.core.Utility;
-import com.traps.trapsapp.network.TRAPSManagerThread;
-import com.traps.trapsapp.network.TRAPSPenalty;
+import com.traps.trapsequipes.core.Bib;
+import com.traps.trapsequipes.core.PenaltyPad;
+import com.traps.trapsequipes.core.TrapsDB;
+import com.traps.trapsequipes.core.Utility;
+import com.traps.trapsequipes.network.TRAPSManagerThread;
+import com.traps.trapsequipes.network.TRAPSPenalty;
 
 public class PenaltyActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
 
@@ -46,7 +46,7 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 	private int bibIndex = 0;
 	private int changeIndex = 0;
 	private Spinner spinner;
-	private SharedPreferences settings; // Keep this for other settings
+	private SharedPreferences settings;
 
 	private boolean smsEnabled = false;
 	private boolean transferEnabled = false;
@@ -65,46 +65,27 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 	public int sndLowPitch;
 	public int sndOKPitch;
 
-    private String penaltyLayoutMode; // To store "slalom" or "kcross"
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		
-        // Read the penalty layout mode from SharedPreferences
-        SharedPreferences transferSettings = getSharedPreferences("SETTINGS_TRANSFER", MODE_PRIVATE);
-        penaltyLayoutMode = transferSettings.getString(
-            TerminalConfigActivity.KEY_PENALTY_LAYOUT_MODE, 
-            TerminalConfigActivity.LAYOUT_MODE_SLALOM // Default to slalom if not found
-        );
-
 		// if permanent menu key, remove title 
 		if(Build.VERSION.SDK_INT <= 10 || (Build.VERSION.SDK_INT >= 14 &&    
                 ViewConfiguration.get(this).hasPermanentMenuKey())) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		} 
 		
-        // Set content view based on the mode
-        if (TerminalConfigActivity.LAYOUT_MODE_KCROSS.equals(penaltyLayoutMode)) {
-            setContentView(R.layout.terminal2_kcross);
-        } else { // Default to slalom
-            setContentView(R.layout.terminal2);
-        }
-
+		setContentView(R.layout.terminal2);
 		getWindow().setFlags(          
 				WindowManager.LayoutParams.FLAG_FULLSCREEN,  
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);   
 	
 		db = TrapsDB.getInstance();
-		
-		penPad = new PenaltyPad(this, penaltyLayoutMode);
 
-		// penPad = new PenaltyPad(this); // PenaltyPad will find its views within the inflated layout
+		penPad = new PenaltyPad(this);
 		bibList = db.getBibList();
 
-		// 'settings' is already initialized as 'transferSettings' above, reuse it
-		settings = transferSettings; // Or just use transferSettings directly everywhere below
+		settings = getSharedPreferences("SETTINGS_TRANSFER", MODE_PRIVATE);
 		dAddress = settings.getString(TerminalConfigActivity.KEY_SMS_ADDRESS,
 				"");
 		Log.i("DAddress", dAddress);
@@ -120,15 +101,8 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 
 		Log.i("smsEnabled", smsEnabled ? "true" : "false");
 		Log.i("transferEnabled", transferEnabled ? "true" : "false");
-        Log.i("PenaltyLayoutMode", penaltyLayoutMode);
-
 
 		String title = "PENALITÉS ";
-        if (TerminalConfigActivity.LAYOUT_MODE_KCROSS.equals(penaltyLayoutMode)) {
-            title += "KCROSS ";
-        } else {
-            title += "SLALOM ";
-        }
 		if (smsEnabled && transferEnabled) title += "SMS";
 		else if (transferEnabled) title += "WIFI";
 		setTitle(title);
@@ -235,7 +209,7 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 				} catch (Exception e) {
 					Log.e("SMS", e.getMessage());
 					Utility.alert(this, "Erreur",
-							"Impossible d'envoyer les pénalités: numero destinataire SMS incorrect"
+							"Impossible d'envoyer les penalités: numero destinataire SMS incorrect"
 									+ dAddress);
 				}
 			} else
@@ -296,13 +270,19 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 			// count the number of penalties set and compare with the total
 			// number of gate. Display popup if count>0 and count<number of
 			// gatges
-			int count = 0;
-			for (int i = 0; i < map.size(); i++)
-				if (map.valueAt(i) > -1)
-					count++;
+			int count = map.size(); 
 
+			int totalVisibleRows = penPad.getActiveJudgmentRowCount();
+
+			// Si le terminal est configuré pour n'afficher aucune porte, on ne fait rien.
+			if (totalVisibleRows == 0) {
+				commitPenalties();
+				paintBib();
+				return true;
+			}
+				
 			// if partially filled or there were not empty before
-			if ((count > 0) && (count < map.size())) {
+			if (count > 0 && count < totalVisibleRows) {
 				sendPenaltyConfirmDialog = new AlertDialog.Builder(this)
 						.setTitle("Pénalités incomplètes")
 						.setMessage(
@@ -358,7 +338,6 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 
 	private void setGateNumbers() {
 		penPad.getDialogGateSelection(this).show();
-		// penPad.getDialogGateSelection(this,TerminalConfigActivity.LAYOUT_MODE_KCROSS.equals(penaltyLayoutMode)).show();
 
 	}
 

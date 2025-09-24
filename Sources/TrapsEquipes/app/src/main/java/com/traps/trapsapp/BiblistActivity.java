@@ -1,4 +1,4 @@
-package com.traps.trapsapp;
+package com.traps.trapsequipes;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -30,18 +30,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.traps.trapsapp.core.Bib;
-import com.traps.trapsapp.core.BibLoader;
-import com.traps.trapsapp.core.BiblistAdapter;
-import com.traps.trapsapp.core.CreateListTask;
-import com.traps.trapsapp.core.FFCanoeHelper;
-import com.traps.trapsapp.core.ResetPenaltyTask;
-import com.traps.trapsapp.core.SMSData;
-import com.traps.trapsapp.core.SimpleInputDialog;
-import com.traps.trapsapp.core.SystemParam;
-import com.traps.trapsapp.core.TrapsDB;
-import com.traps.trapsapp.core.Utility;
-import com.traps.trapsapp.network.UDPListener;
+import com.traps.trapsequipes.core.Bib;
+import com.traps.trapsequipes.core.BibLoader;
+import com.traps.trapsequipes.core.BiblistAdapter;
+import com.traps.trapsequipes.core.CreateListTask;
+import com.traps.trapsequipes.core.FFCanoeHelper;
+import com.traps.trapsequipes.core.ResetPenaltyTask;
+import com.traps.trapsequipes.core.SMSData;
+import com.traps.trapsequipes.core.SimpleInputDialog;
+import com.traps.trapsequipes.core.SystemParam;
+import com.traps.trapsequipes.core.TrapsDB;
+import com.traps.trapsequipes.core.Utility;
+import com.traps.trapsequipes.network.UDPListener;
 
 import java.net.NetworkInterface;
 import java.text.ParseException;
@@ -410,6 +410,33 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
 
     }
 
+    // A Propos
+    private void aPropos() {
+        String appName = getString(R.string.app_name);
+        String versionName = "1.0";
+        
+
+        // Construire le message directement
+        String aboutMessage = String.format(
+                "Version : %1$s\n\nAdapatation de Traps 2.7 \npar Verdier Stéphane\n\n\u00A9 Juin 2025",
+                versionName
+        );
+
+        // Utiliser AlertDialog.Builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("À propos de "+ appName);
+        builder.setMessage(aboutMessage); // Message simple
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        // Créer et afficher l'AlertDialog
+        AlertDialog aboutDialog = builder.create();
+        aboutDialog.show();
+    }
+
     private void authorize() {
         Intent intent = new Intent(this, SenderListActivity.class);
         startActivity(intent);
@@ -559,6 +586,9 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
             return true;
         } else if (id == R.id.newlist) {
             newList();
+            return true;
+        } else if (id == R.id.apropos) {
+            aPropos();
             return true;
         } else if (id == R.id.load) {
             loadBibList();

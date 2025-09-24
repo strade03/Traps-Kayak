@@ -1,4 +1,4 @@
-package com.traps.trapsapp;
+package com.traps.trapsequipes;
 
 import java.net.InetSocketAddress;
 
@@ -21,10 +21,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.traps.trapsapp.core.FFCanoeHelper;
-import com.traps.trapsapp.core.IConnectedResult;
-import com.traps.trapsapp.core.IPAddressHelper;
-import com.traps.trapsapp.core.Utility;
+import com.traps.trapsequipes.core.FFCanoeHelper;
+import com.traps.trapsequipes.core.IConnectedResult;
+import com.traps.trapsequipes.core.IPAddressHelper;
+import com.traps.trapsequipes.core.Utility;
 
 public class FFCanoeConnectActivity extends AppCompatActivity implements OnClickListener, IConnectedResult {
  

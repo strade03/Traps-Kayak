@@ -1,4 +1,4 @@
-package com.traps.trapsapp.core;
+package com.traps.trapsequipes.core;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

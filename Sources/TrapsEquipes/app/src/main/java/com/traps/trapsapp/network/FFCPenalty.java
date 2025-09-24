@@ -1,4 +1,4 @@
-package com.traps.trapsapp.network;
+package com.traps.trapsequipes.network;
 
 
 public class FFCPenalty extends FFCPacket {
