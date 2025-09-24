@@ -1,0 +1,5 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/add_sender" android:title="Ajouter un numéro"  android:icon="@drawable/plus_one" ></item>
+        <item android:id="@+id/delete_sender" android:title="Effacer les numéros sélectionnés"  android:icon="@drawable/content_discard"></item>
+    </menu>

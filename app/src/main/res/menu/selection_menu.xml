@@ -1,0 +1,9 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/unselectall" android:title="Déselectionner tout" android:icon="@drawable/navigation_cancel"></item>
+        <item android:id="@+id/lock" android:title="Verrouiller" android:icon="@drawable/device_access_secure"></item>
+        <item android:id="@+id/unlock" android:title="Déverrouiller" android:icon="@drawable/device_access_not_secure"></item>
+        <item android:id="@+id/sendagain" android:title="Vers FFCanoe" android:icon="@drawable/social_forward"></item>
+        
+        
+    </menu>

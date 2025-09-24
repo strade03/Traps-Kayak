@@ -1,0 +1,12 @@
+
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/terminal" android:title="Pénalités" android:icon="@drawable/hardware_phone"></item>
+        <item android:id="@+id/chronostart" android:title="Chrono Départ" android:icon="@drawable/stopwatch"></item>
+        <item android:id="@+id/chronofinish" android:title="Chrono Arrivé" android:icon="@drawable/stopwatch"></item>
+        <item android:id="@+id/load" android:title="Charger liste dossards" android:icon="@drawable/av_download"></item>
+        <item android:id="@+id/reset" android:title="Effacer données" android:icon="@drawable/av_repeat"></item>
+        <item android:id="@+id/connect" android:title="Connect" android:icon="@drawable/device_access_network_wifi"></item>
+		<item android:id="@+id/authorize" android:title="Terminaux autorisés" android:icon="@drawable/device_access_accounts"></item>
+        <item android:id="@+id/newlist" android:title="Créer liste dossards" android:icon="@drawable/device_access_storage"></item>
+
+    </menu>
