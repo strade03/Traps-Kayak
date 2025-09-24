@@ -23,13 +23,23 @@ TRAPS App est une application Android native dédiée à la gestion des compéti
 - Gradle 8.2.0
 
 ## Installation
+[De préférence installer Docker pour compiler](https://github.com/strade03/Traps-Kayak/tree/main/Outils_Compilation)
 1. Clonez le repository :
 ```bash
 git clone [URL_DU_REPO]
-```
+``` 
 2. Ouvrez le projet dans Android Studio
-3. Synchronisez le projet avec Gradle
-4. Lancez l'application sur un émulateur ou un appareil physique
+3. Créer la clé pour la signature :
+   1. si vous utilser docker :
+         docker run -v ./:/app -it android_builder /bin/bash
+   2. placer dans le dossier app pour y créer la clé.
+   3. keytool -genkey -v -keystore trapsapp-release-key.keystore -alias trapsapp_key -keyalg RSA -keysize 2048 -validity 10000
+   4. renseigner le fichier keystore.properties (storePassword et keyPassword)
+
+4. Avec docker pour compiler :
+      docker run --rm  -v ./:/app android_builder gradle assembleRelease --stacktrace -x lint
+
+
 
 ## Guide de Démarrage avec Android Studio
 
