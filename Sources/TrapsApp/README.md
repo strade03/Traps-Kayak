@@ -2,6 +2,7 @@
 
 ## Description
 TRAPS App est une application Android native dédiée à la gestion des compétitions de Canoë Kayak. Cette application permet d'organiser, de gérer et de suivre les événements et les compétitions de Canoë Kayak de manière efficace et intuitive.
+Cette version prend en charge la gestion du Slalom et du KCross
 
 ## Technologies Utilisées
 - Android SDK (API 33)
