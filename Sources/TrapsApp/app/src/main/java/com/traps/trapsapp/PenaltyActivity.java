@@ -29,6 +29,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import android.content.pm.PackageManager;
+import android.Manifest;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.annotation.NonNull;
+
 import com.traps.trapsapp.core.Bib;
 import com.traps.trapsapp.core.PenaltyPad;
 import com.traps.trapsapp.core.TrapsDB;
@@ -387,6 +393,30 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == 1001) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				// Permission accordée → relance l’envoi si besoin
+				commitPenalties(); // ou ce que tu veux
+			} else {
+				if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+					// L'utilisateur a bloqué définitivement
+					Utility.alert(this, "Permission bloquée",
+						"L'envoi de SMS est désactivé. Veuillez l'activer dans les paramètres de l'application.");
+					Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+					Uri uri = Uri.fromParts("package", getPackageName(), null);
+					intent.setData(uri);
+					startActivity(intent);
+				} else {
+					// Permission refusée
+					Utility.alert(this, "Permission requise", "L'envoi SMS nécessite la permission d'envoyer des SMS.");
+				}
+			}
+		}
+	}
+
 	private void commitPenalties() {
 		Bib bib = bibList.get(bibIndex);
 		SparseIntArray penaltyMap = penPad.getPenaltyMap();
@@ -395,11 +425,17 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 		db.updateBibPenalty(bib.getBibnumber(), penaltyMap);
 		if (transferEnabled) {
 			// HERE: send penalties
-			
+			if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+					!= PackageManager.PERMISSION_GRANTED) {
+				// Permission non accordée → la demander
+				ActivityCompat.requestPermissions(this,
+						new String[]{Manifest.permission.SEND_SMS},
+						1001); // code de requête
+			} else {
+				// Permission OK → envoi possible
 				sendPenalties(bib);
+			}
 				play(sndOKPitch);
-			
-
 		}
 
 		bibIndex = changeIndex;

@@ -33,6 +33,12 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import android.content.pm.PackageManager;
+import android.Manifest;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.annotation.NonNull;
+
 import com.traps.trapsapp.core.Bib;
 import com.traps.trapsapp.core.SystemParam;
 import com.traps.trapsapp.core.TrapsDB;
@@ -89,6 +95,7 @@ public class ChronoActivity extends AppCompatActivity {
 		settings = getSharedPreferences("SETTINGS_TRANSFER", MODE_PRIVATE);
 		dAddress = settings.getString(TerminalConfigActivity.KEY_SMS_ADDRESS,
 				"");
+		
 		Log.i("DAddress", dAddress);
 		smsEnabled = settings.getBoolean(
 				TerminalConfigActivity.KEY_SMS_ENABLED, false);
@@ -222,6 +229,30 @@ public class ChronoActivity extends AppCompatActivity {
 		soundPool.play(id, 1, 1, 0, 0, 1);
 	}
 	
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == 1001) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				// Permission accordée → relance l’envoi si besoin
+				lapButtonPressed(); // ou ce que tu veux
+			} else {
+				if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+					// L'utilisateur a bloqué définitivement
+					Utility.alert(this, "Permission bloquée",
+						"L'envoi de SMS est désactivé. Veuillez l'activer dans les paramètres de l'application.");
+					Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+					Uri uri = Uri.fromParts("package", getPackageName(), null);
+					intent.setData(uri);
+					startActivity(intent);
+				} else {
+					// Permission refusée
+					Utility.alert(this, "Permission requise", "L'envoi SMS nécessite la permission d'envoyer des SMS.");
+				}
+			}
+		}
+	}
+
 	private void lapButtonPressed() {
 		long currentTime = System.currentTimeMillis()+SystemParam.timeshift;
 		Bib bib = bibList.get(bibIndex);
@@ -229,7 +260,17 @@ public class ChronoActivity extends AppCompatActivity {
 		// store in db
 		db.updateBibChrono(chronoType, bib.getBibnumber(), bib.getChrono(chronoType));
 		if (transferEnabled) {
-				sendChrono(bib);
+						if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+				!= PackageManager.PERMISSION_GRANTED) {
+			// Permission non accordée → la demander
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.SEND_SMS},
+					1001); // code de requête
+			} else {
+			// Permission OK → envoi possible
+			sendChrono(bib);
+			}
+			
 		}
     	chronoTextView.setText(bib.getChronoStr(chronoType));
     	chronoTextView.setVisibility(View.VISIBLE);
@@ -251,10 +292,10 @@ public class ChronoActivity extends AppCompatActivity {
 	
 			if (dAddress == "") {
 				Utility.alert(this, "Erreur",
-						"Impossible d'envoyer les chronos: numero destinataire SMS incorrect");
+						"Impossible d'envoyer les chronos: numero destinataire SMS incorrect") ;
 				return;
 			}
-	
+
 			if (PhoneNumberUtils.isWellFormedSmsAddress(dAddress)) {
 				try {
 					Log.i("TerminalActivity", "Sending to " + dAddress + "> "
