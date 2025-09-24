@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 import android.text.Editable;
 import android.text.TextWatcher;

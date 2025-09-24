@@ -1,4 +1,4 @@
-package com.traps.trapsequipes;
+package com.traps.trapsapp;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 
 import android.app.AlertDialog;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import com.traps.trapsequipes.R;
+import com.traps.trapsapp.R;
 
 public class SimpleInputDialog extends AlertDialog {
 

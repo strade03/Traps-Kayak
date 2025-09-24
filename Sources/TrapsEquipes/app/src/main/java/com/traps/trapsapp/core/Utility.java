@@ -1,10 +1,10 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 
 import android.app.AlertDialog;
 import android.content.Context;
 
-import com.traps.trapsequipes.R;
+import com.traps.trapsapp.R;
 
 
 public class Utility {

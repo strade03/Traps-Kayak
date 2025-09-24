@@ -1,10 +1,10 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.traps.trapsequipes.network.UDPListener;
+import com.traps.trapsapp.network.UDPListener;
 
 public class UDPSyncTask extends AsyncTask<Void, Integer, Boolean> {
 

@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 
 public class PenaltyButton  {

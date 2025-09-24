@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.traps.trapsequipes.R;
+import com.traps.trapsapp.R;
 
 
 public class BiblistAdapter extends BaseAdapter {

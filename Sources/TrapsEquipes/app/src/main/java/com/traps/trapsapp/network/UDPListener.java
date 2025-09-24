@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.network;
+package com.traps.trapsapp.network;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

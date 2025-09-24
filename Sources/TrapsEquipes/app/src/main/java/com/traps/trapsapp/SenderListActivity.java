@@ -1,4 +1,4 @@
-package com.traps.trapsequipes;
+package com.traps.trapsapp;
 
 import java.util.ArrayList;
 
@@ -14,8 +14,8 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.traps.trapsequipes.core.SimpleInputDialog;
-import com.traps.trapsequipes.core.TrapsDB;
+import com.traps.trapsapp.core.SimpleInputDialog;
+import com.traps.trapsapp.core.TrapsDB;
 
 public class SenderListActivity extends ListActivity implements DialogInterface.OnClickListener {
 

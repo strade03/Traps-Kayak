@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.network;
+package com.traps.trapsapp.network;
 
 
 public class FFCPacket {

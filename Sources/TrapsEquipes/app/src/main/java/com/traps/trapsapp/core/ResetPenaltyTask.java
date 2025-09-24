@@ -1,4 +1,4 @@
-package com.traps.trapsequipes.core;
+package com.traps.trapsapp.core;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.traps.trapsequipes.BiblistActivity;
+import com.traps.trapsapp.BiblistActivity;
 
 public class ResetPenaltyTask extends AsyncTask<Void, Integer, Integer> implements IProgress {
 

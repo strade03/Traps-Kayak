@@ -39,14 +39,14 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty02"
+            android:id="@+id/penalty00"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text="50"
+            android:text="CLR"
             android:textSize="35sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />     
 
         <Button
             android:id="@+id/penalty01"
@@ -54,17 +54,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 2 "
+            android:text="FLT"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty00"
+            android:id="@+id/penalty02"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 0 "
+            android:text="RAL"
             android:textSize="35sp"
             android:textStyle="bold" />
         
@@ -94,12 +94,12 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty12"
+            android:id="@+id/penalty10"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text="50"
+            android:text="CLR"
             android:textSize="35sp"
             android:textStyle="bold" />
 
@@ -109,17 +109,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 2 "
+            android:text="FLT"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty10"
+            android:id="@+id/penalty12"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 0 "
+            android:text="RAL"
             android:textSize="35sp"
             android:textStyle="bold" />
         
@@ -149,34 +149,35 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty22"
+            android:id="@+id/penalty20"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text="50"
+            android:text="CLR"
             android:textSize="35sp"
             android:textStyle="bold" />
-
+            
         <Button
             android:id="@+id/penalty21"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 2 "
+            android:text="FLT"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty20"
+            android:id="@+id/penalty22"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 0 "
+            android:text="RAL"
             android:textSize="35sp"
             android:textStyle="bold" />
+
         
     </LinearLayout>
                 <LinearLayout
@@ -202,12 +203,12 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty32"
+            android:id="@+id/penalty30"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text="50"
+            android:text="CLR"
             android:textSize="35sp"
             android:textStyle="bold" />
 
@@ -217,20 +218,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 2 "
+            android:text="FLT"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty30"
+            android:id="@+id/penalty32"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 0 "
+            android:text="RAL"
             android:textSize="35sp"
             android:textStyle="bold" />
-        
+                    
     </LinearLayout>
      <LinearLayout
             android:layout_width="match_parent"
@@ -255,35 +256,35 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty42"
+            android:id="@+id/penalty40"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text="50"
+            android:text="CLR"
             android:textSize="35sp"
             android:textStyle="bold" />
-
+        
         <Button
             android:id="@+id/penalty41"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 2 "
+            android:text="FLT"
             android:textSize="35sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/penalty40"
+            android:id="@+id/penalty42"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/penalty"
-            android:text=" 0 "
+            android:text="RAL"
             android:textSize="35sp"
             android:textStyle="bold" />
-        
+
     </LinearLayout>
     
      <LinearLayout
