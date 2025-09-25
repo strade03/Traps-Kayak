@@ -1,14 +1,14 @@
-// Contenu pour Fichier : .\.\FFCChrono.txt
+// Contenu pour Fichier : .\.\CompetFFCKChrono.txt
 package com.traps.trapsapp.network;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
-public class FFCChrono extends FFCPacket {
+public class CompetFFCKChrono extends CompetFFCKPacket {
 
     int chrono; // Time in milliseconds
 
-    public FFCChrono(int bibnumber, int chrono, int runId) {
+    public CompetFFCKChrono(int bibnumber, int chrono, int runId) {
         this.bibnumber = bibnumber;
         this.chrono = chrono;
         this.runId = runId; // Not used by CompetFFCK protocol but kept for compatibility

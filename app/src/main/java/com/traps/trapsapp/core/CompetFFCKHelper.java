@@ -9,46 +9,46 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.traps.trapsapp.network.FFCanoeThread;
+import com.traps.trapsapp.network.CompetFFCKThread;
 
-public class FFCanoeHelper {
+public class CompetFFCKHelper {
 	
 	
-	private FFCanoeThread ffcClient;
-	private static FFCanoeHelper instance;
+	private CompetFFCKThread competffckClient;
+	private static CompetFFCKHelper instance;
 
 	
-	protected FFCanoeHelper() {	}
+	protected CompetFFCKHelper() {	}
 		
-	public static FFCanoeHelper getInstance() {
-		if (instance==null) instance = new FFCanoeHelper();
+	public static CompetFFCKHelper getInstance() {
+		if (instance==null) instance = new CompetFFCKHelper();
 		return instance;
 	}
 	  
 	
 	public boolean isActive() {
-		if ((ffcClient!=null) && (ffcClient.isConnected())) return true;
+		if ((competffckClient!=null) && (competffckClient.isConnected())) return true;
 		return false;
 	}
 	
 	
 	public boolean addPenalty(int bibnumber, int gateName, int value) {
 		if (!isActive()) {
-			Log.e("TRAPS", "Trying to send penalty but FFCClient not connected. Ignore");
+			Log.e("TRAPS", "Trying to send penalty but COMPETFFCKClient not connected. Ignore");
 			return false;
 		}
 		Log.i("CompetFFCKHelper", "Adding to WIFI queue penalty "+value+" for bib number "+bibnumber+" and gate "+gateName);
-		ffcClient.addPenalty(bibnumber, gateName, value);
+		competffckClient.addPenalty(bibnumber, gateName, value);
 		return true;
 	}
 	
 	public boolean addChrono(int bibnumber, int chrono) {
 		if (!isActive()) {
-			Log.e("TRAPS", "Trying to send chrono but FFCClient not connected. Ignore");
+			Log.e("TRAPS", "Trying to send chrono but COMPETFFCKClient not connected. Ignore");
 			return false;
 		}
 		Log.i("CompetFFCKHelper", "Adding to WIFI queue chrono "+chrono+" for bib number "+bibnumber);
-		ffcClient.addChrono(bibnumber, chrono);
+		competffckClient.addChrono(bibnumber, chrono);
 		return true;
 	}
 	
@@ -66,7 +66,7 @@ public class FFCanoeHelper {
 					if (socket.isConnected()) {
 				
 						try {
-							ffcClient = new FFCanoeThread(socket, runId);
+							competffckClient = new CompetFFCKThread(socket, runId);
 							cb.connectedResult(0);
 							return;
 						} catch (Exception e) {}
@@ -89,7 +89,7 @@ public class FFCanoeHelper {
 	public void disconnect(Context context) {
 		
 		if (isActive()) {
-			ffcClient.disconnect();
+			competffckClient.disconnect();
 			Toast.makeText(context, "Déconnexion CompetFFCK", Toast.LENGTH_SHORT).show();
 		}		
 			

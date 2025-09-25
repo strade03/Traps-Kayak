@@ -11,11 +11,11 @@ android {
         minSdk 16
         targetSdk 33
         versionCode 30
-        versionName "3.0"
+        versionName "3.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Ajout pour la signature de l'APK
+   // Ajout pour la signature de l'APK
     // Chargement des propriétés du keystore depuis la racine
     def keystorePropertiesFile = rootProject.file("keystore.properties")
     def keystoreProperties = new Properties()

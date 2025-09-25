@@ -43,8 +43,8 @@
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
         <activity
-            android:name="com.traps.trapsapp.FFCanoeConnectActivity"
-            android:label="@string/FFCanoeConnectActivity_title"
+            android:name="com.traps.trapsapp.CompetFFCKConnectActivity"
+            android:label="@string/CompetFFCKConnectActivity_title"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
 

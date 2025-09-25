@@ -1,4 +1,4 @@
-// Contenu pour Fichier : .\.\FFCPacket.txt
+// Contenu pour Fichier : .\.\CompetFFCKPacket.txt
 package com.traps.trapsapp.network;
 
 import java.nio.charset.StandardCharsets;
@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
  * NOTE: This class and its subclasses have been adapted to generate packets
  * for the CompetFFCK protocol, which is text-based.
  */
-public class FFCPacket {
+public class CompetFFCKPacket {
 
     protected int bibnumber = 0;
 

@@ -21,12 +21,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.traps.trapsapp.core.FFCanoeHelper;
+import com.traps.trapsapp.core.CompetFFCKHelper;
 import com.traps.trapsapp.core.IConnectedResult;
 import com.traps.trapsapp.core.IPAddressHelper;
 import com.traps.trapsapp.core.Utility;
 
-public class FFCanoeConnectActivity extends AppCompatActivity implements OnClickListener, IConnectedResult {
+public class CompetFFCKConnectActivity extends AppCompatActivity implements OnClickListener, IConnectedResult {
  
 	private Button connectButton;
 	private EditText portField;
@@ -55,9 +55,9 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
         super.onCreate(savedInstanceState);
     
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.ffcanoe_connect_layout);
+        setContentView(R.layout.competffck_connect_layout);
         context = this;
-        settings = getSharedPreferences("SETTINGS_FFCANOE", MODE_PRIVATE);
+        settings = getSharedPreferences("SETTINGS_COMPETFFCK", MODE_PRIVATE);
     	
         connectButton = (Button)findViewById(R.id.buttonConnect);
         connectButton.setOnClickListener(this);
@@ -65,13 +65,13 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
         final EditText addressField0 = (EditText)findViewById(R.id.ffanoeAddress1);
         addressField0.setText(settings.getString(KEY_ADDRESS0, "192"));
         
-        final EditText addressField1 = (EditText)findViewById(R.id.ffcanoeAddress2);
+        final EditText addressField1 = (EditText)findViewById(R.id.competffckAddress2);
         addressField1.setText(settings.getString(KEY_ADDRESS1, "168"));
 
-        final EditText addressField2 = (EditText)findViewById(R.id.ffcanoeAddress3);
+        final EditText addressField2 = (EditText)findViewById(R.id.competffckAddress3);
         addressField2.setText(settings.getString(KEY_ADDRESS2, "1"));
 
-        final EditText addressField3 = (EditText)findViewById(R.id.ffcanoeAddress4);
+        final EditText addressField3 = (EditText)findViewById(R.id.competffckAddress4);
         addressField3.setText(settings.getString(KEY_ADDRESS3, "100"));
         
         forwardPenalty = (CheckBox)findViewById(R.id.forwardPenalty);
@@ -82,14 +82,14 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
 
         ipAddressHelper = new IPAddressHelper(addressField0, addressField1, addressField2, addressField3);
         
-        portField = (EditText)findViewById(R.id.editPortFFCanoe);
+        portField = (EditText)findViewById(R.id.editPortCompetFFCK);
         portField.setText(Integer.toString(settings.getInt(KEY_PORT, 7012)));
         radioField1 = (RadioButton)findViewById(R.id.radioRun1);
         radioField2 = (RadioButton)findViewById(R.id.radioRun2);
         radioField1.setChecked(settings.getBoolean(KEY_RUN1, true));
         radioField2.setChecked(!settings.getBoolean(KEY_RUN1, true));
         
-        Button deleteButton = (Button)findViewById(R.id.buttonDeleteFFCanoeIP);
+        Button deleteButton = (Button)findViewById(R.id.buttonDeleteCompetFFCKIP);
         deleteButton.setOnClickListener(new OnClickListener() {
 			
 			public void onClick(View arg0) {
@@ -140,7 +140,7 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
 		int runId = 1;
 		if (!run1) runId = 2;
 		// context, address, port, runId, callback (connectedResult);
-		FFCanoeHelper.getInstance().connect(this, new InetSocketAddress(address, port), runId, this);
+		CompetFFCKHelper.getInstance().connect(this, new InetSocketAddress(address, port), runId, this);
 		
 	}
 

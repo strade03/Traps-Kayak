@@ -1,4 +1,4 @@
-// Contenu pour Fichier : .\.\FFCanoeThread.txt
+// Contenu pour Fichier : .\.\CompetFFCKThread.txt
 package com.traps.trapsapp.network;
 
 import java.io.IOException;
@@ -10,18 +10,18 @@ import java.util.concurrent.LinkedBlockingQueue;
 import android.util.Log;
 
 /**
- * NOTE: This class was originally for FFCanoe but has been completely adapted
+ * NOTE: This class was originally for CompetFFCK but has been completely adapted
  * to handle the text-based protocol for CompetFFCK.
- * The class name "FFCanoeThread" is kept for compatibility with the rest of the app.
+ * The class name "CompetFFCKThread" is kept for compatibility with the rest of the app.
  */
-public class FFCanoeThread extends Thread {
+public class CompetFFCKThread extends Thread {
 
     // The C++ code for CompetFFCK had a commented-out delay of 250ms.
     // We'll use a small, safe delay. Adjust if needed. 0 might also work.
     private static final int COMPETFFCK_PAUSE = 50; // Pause in milliseconds
 
     private boolean connected = false;
-    private LinkedBlockingQueue<FFCPacket> outputQ;
+    private LinkedBlockingQueue<CompetFFCKPacket> outputQ;
     private OutputStream outputStream;
     private Socket socket;
     
@@ -29,7 +29,7 @@ public class FFCanoeThread extends Thread {
     private int runId;
 
 
-    public FFCanoeThread(Socket socket, int runId) throws IOException {
+    public CompetFFCKThread(Socket socket, int runId) throws IOException {
         this.socket = socket;
         this.runId = runId;
         outputStream = socket.getOutputStream();
@@ -47,7 +47,7 @@ public class FFCanoeThread extends Thread {
         }
         // Add an empty packet to unblock the outputQ.take() call and allow the thread to terminate
         try {
-            outputQ.put(new FFCPacket());
+            outputQ.put(new CompetFFCKPacket());
         } catch (Exception e) {
             // Ignore
         }
@@ -59,7 +59,7 @@ public class FFCanoeThread extends Thread {
 
     public void addPenalty(int bibnumber, int gateIndex, int penalty) {
         try {
-            outputQ.put(new FFCPenalty(bibnumber, gateIndex, penalty, this.runId));
+            outputQ.put(new CompetFFCKPenalty(bibnumber, gateIndex, penalty, this.runId));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restore interrupted status
         }
@@ -67,7 +67,7 @@ public class FFCanoeThread extends Thread {
 
     public void addChrono(int bibnumber, int chrono) {
         try {
-            outputQ.put(new FFCChrono(bibnumber, chrono, this.runId));
+            outputQ.put(new CompetFFCKChrono(bibnumber, chrono, this.runId));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restore interrupted status
         }
@@ -91,7 +91,7 @@ public class FFCanoeThread extends Thread {
         try {
             while (connected) {
                 // Wait for a packet to be available
-                FFCPacket packet = outputQ.take();
+                CompetFFCKPacket packet = outputQ.take();
 
                 if (packet.isValid()) {
                     byte[] data = packet.getByteArray();
