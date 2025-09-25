@@ -502,7 +502,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
             if (resultCode == RESULT_OK) {
                 setTitle(getResources().getString(
                         R.string.BiblistActivity_title)
-                        + " | Connecté FFCanoe");
+                        + " | Connecté CompetFFCK");
                 forwardChrono = data.getBooleanExtra("forwardChrono", false);
                 forwardPenalty = data.getBooleanExtra("forwardPenalty", true);
 

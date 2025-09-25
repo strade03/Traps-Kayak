@@ -1,55 +1,38 @@
+// Contenu pour Fichier : .\.\FFCPacket.txt
 package com.traps.trapsapp.network;
 
+import java.nio.charset.StandardCharsets;
 
+/**
+ * NOTE: This class and its subclasses have been adapted to generate packets
+ * for the CompetFFCK protocol, which is text-based.
+ */
 public class FFCPacket {
 
-	protected int runId = 1;
-	protected short bibnumber = 0;
+    protected int bibnumber = 0;
 
-	/**
-	 * Returns LSB at index 0 and MSB at index 1
-	 * 
-	 * @param value
-	 * @return
-	 */
-	protected byte[] get2Bytes(short value) {
-		byte[] data = new byte[2];
-		data[1] = (byte) (value >> 8);
-		data[0] = (byte) (value & 0xFF);
-		return data;
-	}
-	
-	protected byte[] get4Bytes(int value) {
-		byte[] data = new byte[4];
-		data[3] = (byte) (value >> 24);
-		data[2] = (byte) (value >> 16);
-		data[1] = (byte) (value >> 8);
-		data[0] = (byte) (value & 0xFF);
-		return data;
-	}
+    // runId is no longer used by the CompetFFCK protocol for penalties/chronos,
+    // but kept for API compatibility.
+    protected int runId = 1;
 
-	public boolean isValid() {
-		
-		return false;
+    public boolean isValid() {
+        // A generic packet is not valid, only its subclasses are.
+        return false;
+    }
 
-	}
-	/**
-	 * Returns an array of bytes to be sent to FFCanoe
-	 * 
-	 * @return
-	 */
-	public byte[] getByteArray() {
-		return null;
-	}
+    /**
+     * Returns a byte array representing the text command for CompetFFCK.
+     * @return byte[] to be sent over the socket, or null if the packet is invalid.
+     */
+    public byte[] getByteArray() {
+        return null;
+    }
 
-	public short getBibnumber() {
-		return bibnumber;
-	}
+    public int getBibnumber() {
+        return bibnumber;
+    }
 
-
-	public int getRunId() {
-		return runId;
-	}
-
-
+    public int getRunId() {
+        return runId;
+    }
 }

@@ -83,7 +83,7 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
         ipAddressHelper = new IPAddressHelper(addressField0, addressField1, addressField2, addressField3);
         
         portField = (EditText)findViewById(R.id.editPortFFCanoe);
-        portField.setText(Integer.toString(settings.getInt(KEY_PORT, 7072)));
+        portField.setText(Integer.toString(settings.getInt(KEY_PORT, 7012)));
         radioField1 = (RadioButton)findViewById(R.id.radioRun1);
         radioField2 = (RadioButton)findViewById(R.id.radioRun2);
         radioField1.setChecked(settings.getBoolean(KEY_RUN1, true));
@@ -131,9 +131,9 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
 		boolean run1 = true;
 		if (!radioField1.isChecked()) run1 = false;
 		editor.putBoolean(KEY_RUN1, run1);
-		Log.i("FFCanoe", "address="+address);
-		Log.i("FFCanoe", "port="+port);
-		Log.i("FFCanoe", "runId="+run1);		
+		Log.i("CompetFFCK", "address="+address);
+		Log.i("CompetFFCK", "port="+port);
+		Log.i("CompetFFCK", "runId="+run1);		
 		editor.commit();
 		
 		// now try to connect
@@ -146,7 +146,7 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
 
 	public void connectedResult(int value) {
 		if (value==0) {
-			Toast.makeText(this, "Connecte a FFCanoe", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Connecte a CompteFFCK", Toast.LENGTH_LONG).show();
 			Intent output = new Intent();
 			output.putExtra("forwardPenalty", forwardPenalty.isChecked());
 			output.putExtra("forwardChrono", forwardChrono.isChecked());
@@ -154,7 +154,7 @@ public class FFCanoeConnectActivity extends AppCompatActivity implements OnClick
 			finish();
 		}
 		else if (value==-1) {
-			Utility.alert(this, "Erreur de connexion", "Impossible de se connecter a FFCanoe");
+			Utility.alert(this, "Erreur de connexion", "Impossible de se connecter a CompetFFCK");
 		}
 		
 		

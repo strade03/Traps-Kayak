@@ -1,73 +1,49 @@
+// Contenu pour Fichier : .\.\FFCPenalty.txt
 package com.traps.trapsapp.network;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 public class FFCPenalty extends FFCPacket {
 
-	byte penalty;
-	byte gateIndex;
+    int penalty;
+    int gateIndex;
 
+    public FFCPenalty(int bibnumber, int gateIndex, int penalty, int runId) {
+        this.bibnumber = bibnumber;
+        this.penalty = penalty;
+        this.gateIndex = gateIndex;
+        this.runId = runId; // Not used by CompetFFCK protocol but kept for compatibility
+    }
 
-	public FFCPenalty(short bibnumber, byte gateIndex, byte penalty, int runId) {
-		this.bibnumber = bibnumber;
-		this.penalty = penalty;
-		this.gateIndex = gateIndex;
-		this.runId = runId;
-	}
+    @Override
+    public String toString() {
+        return "bibnumber=" + bibnumber + " | gateIndex=" + gateIndex + " | penalty=" + penalty;
+    }
 
-	
+    @Override
+    public boolean isValid() {
+        if (bibnumber <= 0) return false;
+        if (gateIndex < 0) return false; // Gate numbers are positive
+        if (penalty < 0) return false;
+        return true;
+    }
 
-	public String toString() {
-		return "bibnumber="+bibnumber+" | gateIndex="+gateIndex+" | penalty="+penalty;
-	}
-	
+    /**
+     * Returns a byte array representing the text command for CompetFFCK.
+     * Format: "penalty <bib> <gate> 1 <penalty>\r"
+     * @return byte[] to be sent over the socket.
+     */
+    @Override
+    public byte[] getByteArray() {
+        if (!isValid()) {
+            return null;
+        }
 
-	
-	
-	public boolean isValid() {
-		if (bibnumber <= 0) return false;
-		if (gateIndex < 0) return false;
-		if ((penalty != 0) && (penalty != 2) && (penalty != 50)) return false;
-		if (runId<1) return false;
-		return true;
-
-	}
-
-
-
-	/**
-	 * Returns an array of bytes to be sent to FFCanoe
-	 * 
-	 * @return
-	 */
-	public byte[] getByteArray() {
-
-		if (gateIndex < 0) return null;
-		byte[] data = new byte[19];
-		data[0] = 0; // header
-		data[1] = 0; // header
-		data[2] = 0; // end of machine name
-		data[3] = 0; // raceId LSB
-		data[4] = 0; // raceId MSB
-		byte[] num = get2Bytes((short) bibnumber);
-		data[5] = num[0]; // bib number LSB
-		data[6] = num[1]; // bib number MSB
-		num = get2Bytes((short) runId);
-		data[7] = num[0]; // run id LSB
-		data[8] = num[1]; // run id MSB
-		data[9] = 'P';
-		data[10] = 0;
-		data[11] = penalty;
-		data[12] = 0;
-		data[13] = 0;
-		data[14] = 0;
-		data[15] = gateIndex;
-		data[16] = 0;
-		data[17] = 0;
-		data[18] = 0;
-
-		return data;
-	}
-
-
-
+        // The '1' is a constant value seen in the C++ code for CompetFFCK.
+        String command = String.format(Locale.US, "penalty %d %d 1 %d\r", this.bibnumber, this.gateIndex, this.penalty);
+        
+        // Convert the string to bytes using a standard charset. UTF-8 is safe.
+        return command.getBytes(StandardCharsets.UTF_8);
+    }
 }

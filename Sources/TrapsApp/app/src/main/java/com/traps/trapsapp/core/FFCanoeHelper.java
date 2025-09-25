@@ -37,7 +37,7 @@ public class FFCanoeHelper {
 			Log.e("TRAPS", "Trying to send penalty but FFCClient not connected. Ignore");
 			return false;
 		}
-		Log.i("FFCanoeHelper", "Adding to WIFI queue penalty "+value+" for bib number "+bibnumber+" and gate "+gateName);
+		Log.i("CompetFFCKHelper", "Adding to WIFI queue penalty "+value+" for bib number "+bibnumber+" and gate "+gateName);
 		ffcClient.addPenalty(bibnumber, gateName, value);
 		return true;
 	}
@@ -47,7 +47,7 @@ public class FFCanoeHelper {
 			Log.e("TRAPS", "Trying to send chrono but FFCClient not connected. Ignore");
 			return false;
 		}
-		Log.i("FFCanoeHelper", "Adding to WIFI queue chrono "+chrono+" for bib number "+bibnumber);
+		Log.i("CompetFFCKHelper", "Adding to WIFI queue chrono "+chrono+" for bib number "+bibnumber);
 		ffcClient.addChrono(bibnumber, chrono);
 		return true;
 	}
@@ -55,8 +55,8 @@ public class FFCanoeHelper {
 	public void connect(Context context, InetSocketAddress address, final int runId, final IConnectedResult cb) {
 		
 		disconnect(context);
-		Log.i("FFCanoehelper", "Trying to connect to FFCanoe");
-		(new SocketConnectorTask(context, "Connexion FFCanoe") {
+		Log.i("CompetFFCKhelper", "Trying to connect to CompetFFCK");
+		(new SocketConnectorTask(context, "Connexion CompetFFCK") {
 			
 			@Override
 			protected void onPostExecute(Socket socket) {
@@ -90,7 +90,7 @@ public class FFCanoeHelper {
 		
 		if (isActive()) {
 			ffcClient.disconnect();
-			Toast.makeText(context, "Déconnexion FFCanoe", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Déconnexion CompetFFCK", Toast.LENGTH_SHORT).show();
 		}		
 			
 		 
