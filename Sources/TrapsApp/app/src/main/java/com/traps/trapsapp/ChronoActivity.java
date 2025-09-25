@@ -263,7 +263,7 @@ public class ChronoActivity extends AppCompatActivity {
 		// store in db
 		db.updateBibChrono(chronoType, bib.getBibnumber(), bib.getChrono(chronoType));
 		if (transferEnabled) {
-						if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+			if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
 				!= PackageManager.PERMISSION_GRANTED) {
 			// Permission non accordée → la demander
 			ActivityCompat.requestPermissions(this,

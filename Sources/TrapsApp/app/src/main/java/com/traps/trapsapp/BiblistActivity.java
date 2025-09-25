@@ -1,5 +1,6 @@
 package com.traps.trapsapp;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,11 +31,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+// import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
+import androidx.annotation.NonNull; 
+
 import com.traps.trapsapp.core.Bib;
 import com.traps.trapsapp.core.BibLoader;
 import com.traps.trapsapp.core.BiblistAdapter;
 import com.traps.trapsapp.core.CreateListTask;
-import com.traps.trapsapp.core.FFCanoeHelper;
+import com.traps.trapsapp.core.CompetFFCKHelper;
 import com.traps.trapsapp.core.ResetPenaltyTask;
 import com.traps.trapsapp.core.SMSData;
 import com.traps.trapsapp.core.SimpleInputDialog;
@@ -51,13 +56,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class BiblistActivity extends AppCompatActivity implements OnClickListener, OnItemClickListener {
 
-    private static final int FFCANOE_CONNECT_ACTIVITY = 0;
+    private static final int COMPETFFCK_CONNECT_ACTIVITY = 0;
     private static final int TERMINAL_ACTIVITY = 2;
     private static final int CONFIG_TERMINAL_ACTIVITY = 3;
     private static final int CONFIG_CHRONO_ACTIVITY = 4;
     private static final int CHRONO_ACTIVITY = 5;
+
+    private static final String PREFS_PERMISSION = "permission_prefs";
+    private static final String KEY_SMS_PERMISSION_REQUESTED = "sms_permission_requested";
 
     private BiblistAdapter listAdapter;
     private ArrayList<Bib> bibList = new ArrayList<Bib>();
@@ -72,7 +81,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
 
     private SimpleInputDialog createBibListDialog;
 
-    private FFCanoeHelper ffcanoeHelper;
+    private CompetFFCKHelper competffckHelper;
 
     // used to check the validity of SMS for each sender
     private Map<String, SparseArray<Long>> sequenceMap = new HashMap<String, SparseArray<Long>>();
@@ -145,7 +154,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         listView.setOnItemClickListener(this);
         listView.setFastScrollEnabled(true);
 
-        ffcanoeHelper = FFCanoeHelper.getInstance();
+        competffckHelper = CompetFFCKHelper.getInstance();
         initReceiver();
         // init sound
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
@@ -162,9 +171,32 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         Log.d("UDP","Trying to start UPD listener");
         new UDPListener(this); // this is to be a singleton (acces it via UDPListener.getInstance())
         reloadBibsFromDB();
-
+        ensureSmsPermissionRequested();
     }
 
+    private void ensureSmsPermissionRequested() {
+    SharedPreferences prefs = getSharedPreferences(PREFS_PERMISSION, MODE_PRIVATE);
+    boolean alreadyRequested = prefs.getBoolean(KEY_SMS_PERMISSION_REQUESTED, false);
+
+    if (!alreadyRequested) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.SEND_SMS},
+                    1001);
+        }
+    }
+
+    // Override onRequestPermissionsResult
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        
+        if (requestCode == 1001) {
+            SharedPreferences prefs = getSharedPreferences(PREFS_PERMISSION, MODE_PRIVATE);
+            prefs.edit().putBoolean(KEY_SMS_PERMISSION_REQUESTED, true).apply();
+            // Ne rien faire d'autre
+        }
+    }
+    
     private static String getMacAddr() {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
@@ -232,10 +264,10 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         if (checkedList.size() == 0) {
             getMenuInflater().inflate(R.menu.biblist_menu, menu);
             MenuItem item = menu.findItem(R.id.connect);
-            if (ffcanoeHelper.isActive()) {
-                item.setTitle(getTString(R.string.BiblistActivity_disconnect_ffcanoe));
+            if (competffckHelper.isActive()) {
+                item.setTitle(getTString(R.string.BiblistActivity_disconnect_competffck));
             } else {
-                item.setTitle(getTString(R.string.BiblistActivity_connect_ffcanoe));
+                item.setTitle(getTString(R.string.BiblistActivity_connect_competffck));
             }
         } else {
             getMenuInflater().inflate(R.menu.selection_menu, menu);
@@ -319,21 +351,21 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
                 db.updateBibPenalty(data.getBibnumber(), data.getMap());
                 bib.setPenaltyMap(data.getMap());
                 // send over network
-                if (ffcanoeHelper.isActive()) sendBibPenalty(bib);
+                if (competffckHelper.isActive()) sendBibPenalty(bib);
                 break;
             }
             case SMSData.START_TYPE : {
                 long start = data.getStart();
                 db.updateBibChrono(0, data.getBibnumber(), start);
                 bib.setChrono(0, start);
-                if (ffcanoeHelper.isActive()) sendBibChrono(bib);
+                if (competffckHelper.isActive()) sendBibChrono(bib);
                 break;
             }
             case SMSData.FINISH_TYPE : {
                 long finish = data.getFinish();
                 db.updateBibChrono(1, data.getBibnumber(), finish);
                 bib.setChrono(1, finish);
-                if (ffcanoeHelper.isActive()) sendBibChrono(bib);
+                if (competffckHelper.isActive()) sendBibChrono(bib);
                 break;
 
             }
@@ -351,8 +383,8 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
                     R.string.BiblistActivity_create_or_load_bib_first);
             return;
         }
-        // Disconnect from FFCanoe if connected
-        ffcanoeHelper.disconnect(this);
+        // Disconnect from CompetFFCK if connected
+        competffckHelper.disconnect(this);
         Log.i("BibListActivity", "Open terminal");
 
         Intent intent = new Intent(this, TerminalConfigActivity.class);
@@ -440,7 +472,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
             if ((gateName > 0)
                     && (gateName <= SystemParam.GATE_COUNT)
                     && (value > -1))
-                ffcanoeHelper.addPenalty(bib.getBibnumber(),
+                competffckHelper.addPenalty(bib.getBibnumber(),
                         gateName, value);
 
         }
@@ -450,13 +482,13 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
     private void sendBibChrono(Bib bib) {
         if (!forwardChrono) return;
         int chrono = (int)bib.getTime();
-        if (chrono>0) ffcanoeHelper.addChrono(bib.getBibnumber(), chrono);
+        if (chrono>0) competffckHelper.addChrono(bib.getBibnumber(), chrono);
 
     }
 
 
     private void sendCheckedBibs() {
-        if (ffcanoeHelper.isActive()) {
+        if (competffckHelper.isActive()) {
             for (Integer index : checkedList) {
                 sendBibPenalty(bibList.get(index));
                 sendBibChrono(bibList.get(index));
@@ -465,7 +497,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         } else {
             Toast.makeText(
                     this,
-                    getTString(R.string.BiblistActivity_not_connected_to_ffcanoe),
+                    getTString(R.string.BiblistActivity_not_connected_to_competffck),
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -497,8 +529,8 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         Log.i("TRAPS", "requestCode=" + requestCode);
         Log.i("TRAPS", "resultCode=" + resultCode);
 
-        // returning from FFCAnoe connection
-        if (requestCode == FFCANOE_CONNECT_ACTIVITY) {
+        // returning from COMPETFFCK connection
+        if (requestCode == COMPETFFCK_CONNECT_ACTIVITY) {
             if (resultCode == RESULT_OK) {
                 setTitle(getResources().getString(
                         R.string.BiblistActivity_title)
@@ -530,13 +562,13 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
     }
 
     private void toggleConnection() {
-        if (ffcanoeHelper.isActive()) {
-            ffcanoeHelper.disconnect(this);
+        if (competffckHelper.isActive()) {
+            competffckHelper.disconnect(this);
             setTitle(getResources().getString(R.string.BiblistActivity_title));
             return;
         }
-        Intent intent = new Intent(this, FFCanoeConnectActivity.class);
-        startActivityForResult(intent, FFCANOE_CONNECT_ACTIVITY);
+        Intent intent = new Intent(this, CompetFFCKConnectActivity.class);
+        startActivityForResult(intent, COMPETFFCK_CONNECT_ACTIVITY);
     }
 
     @Override
