@@ -3,7 +3,7 @@ FROM ubuntu:20.04
 
 # Mettre à jour les paquets et installer les dépendances nécessaires
 RUN apt-get update && \
-    apt-get install -y software-properties-common && \
+    apt-get install -y software-properties-common git && \
     dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y \
@@ -63,3 +63,4 @@ COPY . /app
 
 # Définir la commande par défaut
 CMD ["gradle", "build"]
+
