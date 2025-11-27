@@ -1,7 +1,7 @@
 # TrapsApp
 
-traps-V3.apk : prise en charge les courses de Kayak Cross pour le Time Trial. Remplace la version précédente.
-traps-V3.1.apk : remise en fonction des SMS avec liaison avec CompetFFCK. 
+- traps-V3.apk : prise en charge les courses de Kayak Cross pour le Time Trial. Remplace la version précédente.
+- traps-V3.1.apk : remise en fonction des SMS avec liaison avec CompetFFCK. 
 
 # TrapsEquipes
 
