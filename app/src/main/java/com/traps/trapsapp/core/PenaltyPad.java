@@ -376,7 +376,7 @@ public class PenaltyPad implements DialogInterface.OnMultiChoiceClickListener,
 
     private AlertDialog createKCrossConfigDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Configuration Secteurs KCross ("+MAX_KCROSS_CONFIGURABLE_SECTORS+" max)");
+        builder.setTitle("Configuration Zones KCross ("+MAX_KCROSS_CONFIGURABLE_SECTORS+" max)");
 
         View dialogView = activity.getLayoutInflater().inflate(R.layout.dialog_kcross_gate_config, null);
         builder.setView(dialogView);

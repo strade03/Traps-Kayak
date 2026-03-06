@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Secteur 1 -->
+        <!-- Zone 1 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
                 android:id="@+id/kcross_config_active_row_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 1:"/>
+                android:text="Zone 1:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_0"
                 android:layout_width="0dp"
@@ -49,7 +49,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 2 -->
+        <!-- Zone 2 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:id="@+id/kcross_config_active_row_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 2:"/>
+                android:text="Zone 2:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_1"
                 android:layout_width="0dp"
@@ -89,7 +89,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 3 -->
+        <!-- Zone 3 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:id="@+id/kcross_config_active_row_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 3:"/>
+                android:text="Zone 3:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_2"
                 android:layout_width="0dp"
@@ -129,7 +129,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 4 -->
+        <!-- Zone 4 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                 android:id="@+id/kcross_config_active_row_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 4:"/>
+                android:text="Zone 4:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_3"
                 android:layout_width="0dp"
@@ -169,7 +169,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 5 -->
+        <!-- Zone 5 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                 android:id="@+id/kcross_config_active_row_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 5:"/>
+                android:text="Zone 5:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_4"
                 android:layout_width="0dp"
@@ -209,7 +209,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 6 -->
+        <!-- Zone 6 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -220,7 +220,7 @@
                 android:id="@+id/kcross_config_active_row_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 6:"/>
+                android:text="Zone 6:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_5"
                 android:layout_width="0dp"
@@ -249,7 +249,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 7 -->
+        <!-- Zone 7 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                 android:id="@+id/kcross_config_active_row_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 7:"/>
+                android:text="Zone 7:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_6"
                 android:layout_width="0dp"
@@ -289,7 +289,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 8 -->
+        <!-- Zone 8 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -300,7 +300,7 @@
                 android:id="@+id/kcross_config_active_row_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 8:"/>
+                android:text="Zone 8:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_7"
                 android:layout_width="0dp"
@@ -329,7 +329,7 @@
                 android:visibility="gone"/>
         </LinearLayout>
 
-        <!-- Secteur 9 -->
+        <!-- Zone 9 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                 android:id="@+id/kcross_config_active_row_8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Secteur 9:"/>
+                android:text="Zone 9:"/>
             <Spinner
                 android:id="@+id/kcross_config_type_spinner_row_8"
                 android:layout_width="0dp"

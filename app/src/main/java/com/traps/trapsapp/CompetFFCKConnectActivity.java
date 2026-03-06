@@ -21,6 +21,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+// pour la gestion droits SMS
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.Manifest;
+import android.content.pm.PackageManager;
+
 import com.traps.trapsapp.core.CompetFFCKHelper;
 import com.traps.trapsapp.core.IConnectedResult;
 import com.traps.trapsapp.core.IPAddressHelper;
@@ -30,8 +38,6 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
  
 	private Button connectButton;
 	private EditText portField;
-	private RadioButton radioField1;
-	private RadioButton radioField2;
 	
 	private CheckBox forwardPenalty;
 	private CheckBox forwardChrono;
@@ -43,9 +49,10 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
 	private final static String KEY_ADDRESS2 = "address2";
 	private final static String KEY_ADDRESS3 = "address3";
 	private final static String KEY_PORT = "port";
-	private final static String KEY_RUN1 = "run";
 	private final static String KEY_FORWARD_PENALTY = "forwardpenalty";
 	private final static String KEY_FORWARD_CHRONO = "forwardchrono";
+
+	private static final int REQUEST_SMS_PERMISSION = 1001;
 
 	private SharedPreferences settings;
 	
@@ -56,6 +63,12 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
     
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.competffck_connect_layout);
+		// Vérifie les permissions SMS dès l'ouverture
+		if (!checkAndRequestSmsPermission()) {
+			// On ne bloque pas, mais on affiche un toast pour informer
+			Toast.makeText(this, "Les permissions SMS sont nécessaires pour recevoir les données des autres terminaux.", Toast.LENGTH_LONG).show();
+		}
+
         context = this;
         settings = getSharedPreferences("SETTINGS_COMPETFFCK", MODE_PRIVATE);
     	
@@ -84,10 +97,6 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
         
         portField = (EditText)findViewById(R.id.editPortCompetFFCK);
         portField.setText(Integer.toString(settings.getInt(KEY_PORT, 7012)));
-        radioField1 = (RadioButton)findViewById(R.id.radioRun1);
-        radioField2 = (RadioButton)findViewById(R.id.radioRun2);
-        radioField1.setChecked(settings.getBoolean(KEY_RUN1, true));
-        radioField2.setChecked(!settings.getBoolean(KEY_RUN1, true));
         
         Button deleteButton = (Button)findViewById(R.id.buttonDeleteCompetFFCKIP);
         deleteButton.setOnClickListener(new OnClickListener() {
@@ -113,6 +122,34 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
         
 	}
 
+	private boolean checkAndRequestSmsPermission() {
+		if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+				!= PackageManager.PERMISSION_GRANTED) {
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.SEND_SMS},
+					REQUEST_SMS_PERMISSION);
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+		if (requestCode == REQUEST_SMS_PERMISSION) {
+			if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+				Toast.makeText(this, "Permission SMS accordée.", Toast.LENGTH_SHORT).show();
+			} else {
+				if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+					Toast.makeText(this, "Sans permission SMS, vous ne recevrez pas les pénalités des autres terminaux.", Toast.LENGTH_LONG).show();
+				} else {
+					// L'utilisateur a coché "Ne plus demander"
+					Toast.makeText(this, "Permission SMS bloquée. Réactivez-la dans les paramètres de l'appli.", Toast.LENGTH_LONG).show();
+				}
+			}
+		}
+	}
+
 	public void onClick(View v) {
 		
 		String address = ipAddressHelper.toString();
@@ -127,18 +164,11 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
 		
 		int port = Integer.parseInt(portField.getText().toString());
 		if (port>0) editor.putInt(KEY_PORT, port);
-		
-		boolean run1 = true;
-		if (!radioField1.isChecked()) run1 = false;
-		editor.putBoolean(KEY_RUN1, run1);
+		int runId = 1;
 		Log.i("CompetFFCK", "address="+address);
-		Log.i("CompetFFCK", "port="+port);
-		Log.i("CompetFFCK", "runId="+run1);		
+		Log.i("CompetFFCK", "port="+port);	
 		editor.commit();
 		
-		// now try to connect
-		int runId = 1;
-		if (!run1) runId = 2;
 		// context, address, port, runId, callback (connectedResult);
 		CompetFFCKHelper.getInstance().connect(this, new InetSocketAddress(address, port), runId, this);
 		
@@ -159,8 +189,5 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
 		
 		
 	}
-
-
-	
 	
 }
