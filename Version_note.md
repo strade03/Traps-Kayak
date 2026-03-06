@@ -3,4 +3,6 @@
     Version avec ecran au choix Slalom ou KCross
     SMS fonctionnel, avec liaison avec CompetFFCK
 
-    
+### Mars 2026 - Version 3.2
+
+    Correction des nom Secteur devient Zone
