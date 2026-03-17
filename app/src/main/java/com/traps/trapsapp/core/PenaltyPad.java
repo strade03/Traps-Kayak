@@ -59,7 +59,7 @@ public class PenaltyPad implements DialogInterface.OnMultiChoiceClickListener,
     private int rowCountSlalom = 0;
 
     // --- Configuration KCross ---
-    private static final int MAX_KCROSS_CONFIGURABLE_SECTORS = 9;
+    private static final int MAX_KCROSS_CONFIGURABLE_SECTORS = 11;
     private ArrayList<KCrossRowSetup> kCrossRowSetups = new ArrayList<>(MAX_KCROSS_CONFIGURABLE_SECTORS);
     private int[] padToKCrossSetupIndexMap = new int[SystemParam.MAX_GATE_PER_TERMINAL];
 
