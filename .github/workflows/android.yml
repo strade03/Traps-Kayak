@@ -1,10 +1,8 @@
-name: Android Build
+name: Android Release Build
 
 on:
   push:
-    branches: [ "traps-apk-3-sources" ]
-  pull_request:
-    branches: [ "traps-apk-3-sources" ]
+    branches: [ "traps-apk-3-sources" ] # Se déclenche sur ta branche de sources
 
 jobs:
   build:
@@ -23,24 +21,40 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
-    - name: Build with Gradle
-      run: ./gradlew assembleDebug
-
+    # Extraction de la version (ex: 3.4)
     - name: Extract Version Name
       id: extract_version
       run: |
         VERSION=$(grep 'versionName' app/build.gradle | awk -F'"' '{print $2}')
-        echo "Version trouvée : $VERSION"
         echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
 
+    # On recrée le fichier binaire .keystore à partir du secret Base64
+    - name: Decode Keystore
+      run: |
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > trapsapp-release-key.keystore
+
+    # On génère le fichier keystore.properties dynamiquement
+    # Note: storeFile doit pointer vers le fichier qu'on vient de décoder
+    - name: Create keystore.properties
+      run: |
+        echo "storeFile=../trapsapp-release-key.keystore" > keystore.properties
+        echo "storePassword=${{ secrets.STORE_PASSWORD }}" >> keystore.properties
+        echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> keystore.properties
+        echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> keystore.properties
+      # On le place à la racine du projet comme attendu par ton build.gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # Compilation de la version Release (ton build.gradle va détecter le keystore.properties)
+    - name: Build Release APK
+      run: ./gradlew assembleRelease
+
     - name: Rename APK
-      run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/traps-V${{ env.APP_VERSION }}.apk
+      run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: traps-V${{ env.APP_VERSION }}
-        path: app/build/outputs/apk/debug/traps-V${{ env.APP_VERSION }}.apk
+        name: traps-V${{ env.APP_VERSION }}-signed
+        path: app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
