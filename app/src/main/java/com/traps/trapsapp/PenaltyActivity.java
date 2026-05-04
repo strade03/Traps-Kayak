@@ -427,18 +427,18 @@ public class PenaltyActivity extends AppCompatActivity implements DialogInterfac
 		// store in db
 		db.updateBibPenalty(bib.getBibnumber(), penaltyMap);
 		if (transferEnabled) {
-			// HERE: send penalties
-			if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
-					!= PackageManager.PERMISSION_GRANTED) {
-				// Permission non accordée → la demander
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.SEND_SMS},
-						1001); // code de requête
-			} else {
-				// Permission OK → envoi possible
+			if (smsEnabled) { // SI MODE SMS
+				if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+					// Permission non accordée → la demander
+					ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1001);
+				} else {
+					// Permission OK → envoi possible
+					sendPenalties(bib);
+				}
+			} else { // SI MODE WIFI (LAN)
 				sendPenalties(bib);
 			}
-				play(sndOKPitch);
+			play(sndOKPitch);
 		}
 
 		bibIndex = changeIndex;

@@ -63,10 +63,20 @@ public class CompetFFCKConnectActivity extends AppCompatActivity implements OnCl
     
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.competffck_connect_layout);
-		// Vérifie les permissions SMS dès l'ouverture
-		if (!checkAndRequestSmsPermission()) {
-			// On ne bloque pas, mais on affiche un toast pour informer
-			Toast.makeText(this, "Les permissions SMS sont nécessaires pour recevoir les données des autres terminaux.", Toast.LENGTH_LONG).show();
+		// // Vérifie les permissions SMS dès l'ouverture
+		// if (!checkAndRequestSmsPermission()) {
+		// 	// On ne bloque pas, mais on affiche un toast pour informer
+		// 	Toast.makeText(this, "Les permissions SMS sont nécessaires pour recevoir les données des autres terminaux.", Toast.LENGTH_LONG).show();
+		// }
+		
+		// Vérifie les permissions SMS uniquement si le mode SMS est actif dans les paramètres
+		SharedPreferences transferSettings = getSharedPreferences("SETTINGS_TRANSFER", MODE_PRIVATE);
+		boolean isSmsActive = transferSettings.getBoolean(TerminalConfigActivity.KEY_SMS_ENABLED, false);
+		
+		if (isSmsActive) {
+			if (!checkAndRequestSmsPermission()) {
+				Toast.makeText(this, "Les permissions SMS sont nécessaires pour recevoir les données des autres terminaux.", Toast.LENGTH_LONG).show();
+			}
 		}
 
         context = this;

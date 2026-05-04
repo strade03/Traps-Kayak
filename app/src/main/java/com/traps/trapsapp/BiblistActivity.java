@@ -171,7 +171,7 @@ public class BiblistActivity extends AppCompatActivity implements OnClickListene
         Log.d("UDP","Trying to start UPD listener");
         new UDPListener(this); // this is to be a singleton (acces it via UDPListener.getInstance())
         reloadBibsFromDB();
-        ensureSmsPermissionRequested();
+        //ensureSmsPermissionRequested();
     }
 
     private void ensureSmsPermissionRequested() {
