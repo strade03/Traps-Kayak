@@ -24,6 +24,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".BiblistActivity"
+            android:label="@string/BiblistActivity_title"
             android:exported="true"
             tools:ignore="ExtraText">
             <intent-filter>
