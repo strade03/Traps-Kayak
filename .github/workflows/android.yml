@@ -2,9 +2,9 @@ name: Android Build
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "traps-apk-3-sources" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "traps-apk-3-sources" ]
 
 jobs:
   build:
