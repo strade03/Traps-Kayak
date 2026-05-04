@@ -51,10 +51,12 @@ jobs:
       run: ./gradlew assembleRelease
 
     - name: Rename APK
-      run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
+      run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}.apk
+      # run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: traps-V${{ env.APP_VERSION }}-signed
-        path: app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
+        path: app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}.apk
+        # path: app/build/outputs/apk/release/traps-V${{ env.APP_VERSION }}-signed.apk
