@@ -1,0 +1,46 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
+
+    - name: Extract Version Name
+      id: extract_version
+      run: |
+        VERSION=$(grep 'versionName' app/build.gradle | awk -F'"' '{print $2}')
+        echo "Version trouvée : $VERSION"
+        echo "APP_VERSION=$VERSION" >> $GITHUB_ENV
+
+    - name: Rename APK
+      run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/traps-V${{ env.APP_VERSION }}.apk
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: traps-V${{ env.APP_VERSION }}
+        path: app/build/outputs/apk/debug/traps-V${{ env.APP_VERSION }}.apk
